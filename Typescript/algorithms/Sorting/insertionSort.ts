@@ -10,4 +10,3 @@ function insertionSort(array: number[]) {
     }
     return array;
 }
-console.log(insertionSort([4, 1, 6, 32, 12, 56, 34]))

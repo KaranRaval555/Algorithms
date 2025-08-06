@@ -1,4 +1,4 @@
-const binarySearch = (sortedArray: number[], item: number): number => {
+function binarySearch(sortedArray: number[], item: number): number {
     let low = 0;
     let high = sortedArray.length - 1;
     while (low <= high) {
