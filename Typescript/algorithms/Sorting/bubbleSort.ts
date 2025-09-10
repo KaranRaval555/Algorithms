@@ -8,4 +8,3 @@ function bubbleSort(array: number[]) {
     }
     return array;
 }
-console.log(bubbleSort([9, 8, 7, 6, 5, 3, 2, 1]))

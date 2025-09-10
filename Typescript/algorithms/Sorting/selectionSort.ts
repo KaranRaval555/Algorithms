@@ -3,7 +3,7 @@ import { swap } from "../../utils.ts"
 function selectionSort(array: number[]) {
     for (let i = 0; i < array.length; i++) {
         const min = findSmallest(array, i);
-        swap(array, i, min);
+        if (min !== i) swap(array, i, min);
     }
     return array;
 }
