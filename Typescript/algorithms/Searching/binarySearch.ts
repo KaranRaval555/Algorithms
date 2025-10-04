@@ -3,7 +3,7 @@ function binarySearch(sortedArray: number[], item: number): number {
     let high = sortedArray.length - 1;
     while (low <= high) {
         const mid = Math.floor((low + high) / 2);
-        if (sortedArray[mid] === item) return low;
+        if (sortedArray[mid] === item) return mid;
         if (item > sortedArray[mid]) low = mid + 1;
         else high = mid - 1;
     }

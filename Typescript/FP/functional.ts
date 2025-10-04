@@ -79,14 +79,6 @@ const some = ([first, ...rest], test) =>
 const every = ([first, ...rest], test) =>
     first === undefined ? true : test(first) && every(rest, test);
 
-const memoize = (fn) => {
-    const cache = {};
-    return (...args) => {
-        let key = JSON.stringify(args);
-        return cache[key] ?? (cache[key] = f(...args));
-    };
-};
-
 const compose =
     (...fns) =>
         (value) =>
@@ -138,4 +130,3 @@ const filterReduce = (array, predicate) => reduce(
 // trampoline
 
 // write unit tests for each of the functions
-

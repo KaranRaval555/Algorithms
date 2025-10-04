@@ -1,5 +1,4 @@
 function countingSort(array: number[]) {
-    const n = array.length
     const max = Math.max(...array)
     const frequency: number[] = Array(max + 1).fill(0)
     const newArray = []
