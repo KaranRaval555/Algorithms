@@ -1,0 +1,19 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.js || true"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vitest": "^1.0.0",
+    "eslint": "^8.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
+
