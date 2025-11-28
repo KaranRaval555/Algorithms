@@ -1,4 +1,4 @@
-function mergeSort<T>(array: T[]): T[] {
+export function mergeSort<T>(array: T[]): T[] {
     if (array.length == 1) return array;
 
     const mid = Math.floor(array.length / 2);
@@ -23,5 +23,3 @@ function merge<T>(left: T[], right: T[]): T[] {
 
     return sortedArray;
 }
-const arr = [9, 2, 6, 3, 7, 8, 5, 1];
-console.log(mergeSort(arr));

@@ -14,4 +14,4 @@ function countingSort(array: number[]) {
     }
     return newArray
 }
-console.log(countingSort([3, 5, 1, 3, 2, 5, 2, 4, 4]))
+// console.log(countingSort([3, 5, 1, 3, 2, 5, 2, 4, 4]))

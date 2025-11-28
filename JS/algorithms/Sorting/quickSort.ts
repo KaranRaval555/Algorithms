@@ -1,6 +1,6 @@
 import { swap } from "../../utils.ts";
 
-function quickSort<T>(array: T[], left: number, right: number): void {
+export function quickSort<T>(array: T[], left: number, right: number): void {
     if (left < right) {
         const index = partition(array, left, right);
         quickSort(array, left, index - 1);
