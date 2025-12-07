@@ -1,9 +1,9 @@
-export const map = <T>([first, ...rest]: T[], fn: (x: T) => T) =>
+export const map = <T>([first, ...rest]: T[], fn: (x: T) => T): T[] =>
     first === undefined
         ? []
         : [fn(first), ...map(rest, fn)]
 
-export const filter = <T>([first, ...rest]: T[], pred: (x: T) => boolean) =>
+export const filter = <T>([first, ...rest]: T[], pred: (x: T) => boolean): T[] =>
     first === undefined
         ? []
         : pred(first)
@@ -40,7 +40,7 @@ export const filterReduce = (array, predicate) =>
             : [...acc]
     }, [])
 
-export const compose = <T>(...fns) =>
+export const compose = (...fns) =>
     <T>(value: T) => reduceRight(fns, (acc, fn) => fn(acc), value)
 
 export const pipe = (...fns) =>

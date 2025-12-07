@@ -1,6 +1,6 @@
-export function linear_search(array: number[], key: number): number {
-    for (let i = 0; i < array.length; i++) {
-        if (array[i] === key) return i;
+export function linear_search(nums: number[], key: number): number {
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === key) return i;
     }
     return -1;
 }
