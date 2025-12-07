@@ -1,4 +1,4 @@
-import { map, filter, reduce, reduceRight, forEach, compose, pipe, member, intersection, combine, makeSet, diff, symmetricDiff, union, countBy, groupBy } from "../FP/lambdas.js"
+import { map, filter, reduce, reduceRight, forEach, compose, pipe, member, intersection, combine, makeSet, diff, symmetricDiff, union, countBy, groupBy, some, every, mapReduce, filterReduce } from "../FP/lambdas.js"
 import { describe, expect, it } from 'vitest';
 
 describe('Pure lambda functions', () => {
@@ -19,6 +19,14 @@ describe('Pure lambda functions', () => {
     it('ReduceRight', () => {
         expect(reduceRight(names, ((acc: string[], fullName: string) => [...acc, fullName.split(' ')[0]]), [])).toEqual(["John", "Richard", "Linus"])
         expect(reduceRight(numbers, (acc, x) => acc + x, 0)).toEqual(15)
+    })
+    it('MapReduce', () => {
+        expect(mapReduce(numbers, (x: number) => x * x)).toEqual([1, 4, 9, 16, 25])
+        expect(mapReduce(names, (fullName: string) => fullName.split(' ')[0])).toEqual(["Linus", "Richard", "John"])
+    })
+    it('FilterReduce', () => {
+        expect(filterReduce(numbers, (x: number) => x % 2 === 0)).toEqual([2, 4])
+        expect(filterReduce(names, (name: string) => name.includes('s'))).toEqual(["Linus Torvalds"])
     })
     it('ForEach', () => {
         expect(forEach(names, console.log))
@@ -75,4 +83,11 @@ describe('Pure lambda functions', () => {
             ]
         })
     })
+    it('Some', () => {
+        expect(some([1, 3, 5, 7, 2], (element) => element % 2 === 0)).toEqual(true)
+    })
+    it('Every', () => {
+        expect(every([1, 3, 5, 7], (element) => element % 2 !== 0)).toEqual(true)
+    })
 })
+

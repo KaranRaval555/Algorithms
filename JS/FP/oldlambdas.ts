@@ -70,36 +70,6 @@ const union = (array1, array2) => makeSet(combine(array1, array2));
 const unionAll = ([first, ...rest]) =>
     first === undefined ? first : union(first, unionAll(rest));
 
-const countBy = (array, callback) =>
-    reduce(
-        array,
-        (acc, x) => {
-            const result = callback(x);
-            return !acc[result]
-                ? { [result]: 1, ...acc }
-                : { ...acc, [result]: ++acc[result] };
-        },
-        {}
-    );
-
-const groupBy = (array, callback) =>
-    reduce(
-        array,
-        (acc, x) => {
-            const result = callback(x);
-            return !acc[result]
-                ? { ...acc, [result]: [x] }
-                : { ...acc, [result]: [...acc[result], x] };
-        },
-        {}
-    );
-
-const some = ([first, ...rest], test) =>
-    first === undefined ? false : test(first) || some(rest, test);
-
-const every = ([first, ...rest], test) =>
-    first === undefined ? true : test(first) && every(rest, test);
-
 const once =
     (fn, result = 0) =>
         (value) =>

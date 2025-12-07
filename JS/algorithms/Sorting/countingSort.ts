@@ -1,17 +1,16 @@
-function countingSort(array: number[]) {
-    const max = Math.max(...array)
-    const frequency: number[] = Array(max + 1).fill(0)
-    const newArray = []
-    for (let i = 0; i < array.length; i++) {
-        const index = array[i]
-        frequency[index] += 1
+export const countingSort = (arr: number[]) => {
+    if (arr.length === 0) return []
+    const frequencies = new Array(Math.max(...arr) + 1).fill(0)
+    for (let i = 0; i < arr.length; i++) {
+        frequencies[arr[i]]++
     }
-    for (let j = 0; j < frequency.length; j++) {
-        while (frequency[j] > 0) {
-            newArray.push(j);
-            frequency[j]--
+    const newArray: number[] = []
+    for (let j = 0; j < frequencies.length; j++) {
+        let occurences = frequencies[j]
+        while (occurences > 0) {
+            newArray.push(j)
+            occurences--;
         }
     }
     return newArray
 }
-// console.log(countingSort([3, 5, 1, 3, 2, 5, 2, 4, 4]))

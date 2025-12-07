@@ -1,10 +1,10 @@
 import { swap } from "../../utils.ts"
 
-export function bubbleSort(array: number[]) {
-    for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array.length - 1 - i; j++) {
-            if (array[j] > array[j + 1]) swap(array, j, j + 1);
+export function bubbleSort(arr: number[]) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[j] > arr[j + 1]) swap(arr, j, j + 1)
         }
     }
-    return array;
+    return arr
 }
