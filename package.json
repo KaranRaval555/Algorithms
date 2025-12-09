@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "Minimal TypeScript project containing algorithm and data structure implementations with tests.",
   "main": "index.js",
-
-  "lint-staged": {
-    "*.{js,ts}": "eslint --fix"
-  },
-
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.9.2",

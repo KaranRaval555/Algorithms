@@ -1,19 +1,12 @@
 import { swap } from "../../utils.ts"
 
-export function selectionSort(arr: number[]) {
-    for (let i = 0; i < arr.length; i++) {
-        const min = findSmallest(arr, i);
-        if (min !== i) {
-            swap(arr, i, min)
+export function selectionSort(nums: number[]) {
+    for (let i = 0; i < nums.length - 1; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[j] < nums[minIndex]) minIndex = j
         }
+        if (minIndex !== i) swap(nums, i, minIndex)
     }
-    return arr;
-}
-
-function findSmallest(arr: number[], index: number) {
-    let min = index
-    for (let i = index; i < arr.length; i++) {
-        if (arr[i] < arr[min]) min = i
-    }
-    return min
+    return nums;
 }

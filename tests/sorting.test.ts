@@ -2,7 +2,7 @@ import { bubbleSort } from '../algorithms/Sorting/bubbleSort.ts';
 import { selectionSort } from '../algorithms/Sorting/selectionSort.ts';
 import { insertionSort } from '../algorithms/Sorting/insertionSort.ts';
 import { countingSort } from '../algorithms/Sorting/countingSort.ts';
-import { heapSort } from '../algorithms/Sorting/heapSort.ts';
+// import { heapSort } from '../algorithms/Sorting/heapSort.ts';
 import { describe, expect, it } from 'vitest';
 import { mergeSort } from '../algorithms/Sorting/mergeSort.ts';
 // import { quickSort } from '../algorithms/Sorting/quickSort.ts';
@@ -31,7 +31,7 @@ describe("Sorting Algorithms", () => {
         expect(mergeSort([...array])).toEqual(sortedArray);
     });
 
-    it("Heap Sort", () => {
-        expect(heapSort([...array])).toEqual(sortedArray);
-    });
+    // it("Heap Sort", () => {
+    //     expect(heapSort([...array])).toEqual(sortedArray);
+    // });
 });

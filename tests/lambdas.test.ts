@@ -1,4 +1,4 @@
-import { map, filter, reduce, reduceRight, forEach, compose, pipe, member, intersection, combine, makeSet, diff, symmetricDiff, union, countBy, groupBy, some, every, mapReduce, filterReduce } from "../FP/lambdas.js"
+import { map, filter, reduce, reduceRight, forEach, compose, pipe, member, intersection, combine, makeSet, diff, symmetricDiff, union, countBy, groupBy, some, every, mapReduce, filterReduce, once, append, find, flatten, flatmap } from "../FP/lambdas.js"
 import { describe, expect, it } from 'vitest';
 
 describe('Pure lambda functions', () => {
@@ -88,6 +88,23 @@ describe('Pure lambda functions', () => {
     })
     it('Every', () => {
         expect(every([1, 3, 5, 7], (element) => element % 2 !== 0)).toEqual(true)
+    })
+    it('Once', () => {
+        const addOneOnce = once(x => x + 1)
+        expect(addOneOnce(10)).toEqual(11)
+        expect(addOneOnce(50)).toEqual(11)
+    })
+    it('Append', () => {
+        expect(append([1, 2, 3, 4], 5)).toEqual([1, 2, 3, 4, 5])
+    })
+    it('Find', () => {
+        expect(find([1, 2, 4, 5], (x) => x > 4)).toEqual(5)
+    })
+    it('Flatten', () => {
+        expect(flatten([1, [2, 4], [4], [[[5]]], [1, 1, 3], [4, [40]]])).toEqual([1, 2, 4, 4, 5, 1, 1, 3, 4, 40])
+    })
+    it('FlatMap', () => {
+        expect(flatmap([1, 2, 3, 4], (x) => [x * 2])).toEqual([2, 4, 6, 8])
     })
 })
 

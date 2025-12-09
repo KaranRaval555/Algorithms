@@ -113,21 +113,28 @@ export const every = ([first, ...rest], test) =>
         ? true
         : test(first) && every(rest, test)
 
-// export const once = (fn, result = 0) =>
-//
-// export const append = (val, array) =>
-//
-// export const find = ([first, ...rest], predicate) =>
-//
-// export const flatmap = (array, callback) =>
-//
-// export const scan = (array, callback, initialValue) =>
-//
-// export const add = (x, y) =>
+export const once = (fn, result = 0) =>
+    <T>(x: T) => result !== 0 ? result : (result = fn(x), result)
 
-// range
-// implement map and filter in terms of reduce and range function
-// mapObj,filterObj and reduceObj using reduce as more specialized functions for objects
-// trampoline
-// transducer watch rich hickey talk
-// write unit tests for each of the functions
+export const append = <T>([first, ...rest]: T[], val: T) =>
+    first === undefined
+        ? [val]
+        : [first, ...append(rest, val)]
+
+export const find = ([first, ...rest], predicate) =>
+    first === undefined
+        ? undefined
+        : predicate(first) ? first : find(rest, predicate)
+
+type NestedArray<T> = Array<T | NestedArray<T>>;
+
+export const flatten = <T>([first, ...rest]: NestedArray<T>) =>
+    first === undefined
+        ? []
+        : Array.isArray(first)
+            ? [...flatten(first), ...flatten(rest)]
+            : [first, ...flatten(rest)];
+
+
+export const flatmap = (array, callback) =>
+    flatten(map(array, callback))

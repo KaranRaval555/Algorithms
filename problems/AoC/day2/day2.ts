@@ -7,7 +7,7 @@ const input = file.split(',').map((range: string) => range.split('-'))
 const puzzle = (isNotValid: (s: string) => boolean) => {
 
     function findInvalidIds(start: number, end: number) {
-        let ids = []
+        const ids = []
         for (let i = start; i <= end; i++) {
             if (isNotValid(i.toString())) {
                 ids.push(i)
