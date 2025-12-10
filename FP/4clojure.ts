@@ -48,3 +48,10 @@ const fibSeq = (n: number): number[] =>
     n === 0
         ? [0]
         : [...fibSeq(n - 1), fib(n)]
+
+const palindrome = ([first, ...rest]) =>
+    rest.length < 2
+        ? true
+        : first === lastElement(rest) && palindrome(rest.slice(0, -1))
+
+console.log(palindrome(["a", "b", "c", "b", "a"]))

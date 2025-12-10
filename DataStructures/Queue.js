@@ -7,8 +7,8 @@ class Node {
 
 class Queue {
     constructor() {
-        this.tail = null;
         this.front = null;
+        this.rear = null;
     }
     isEmpty() {
         return this.front === null;
@@ -17,11 +17,11 @@ class Queue {
         const newNode = new Node(value)
         if (!this.front) {
             this.front = newNode;
-            this.tail = newNode;
+            this.rear = newNode;
             return;
         }
-        this.tail.next = newNode;
-        this.tail = newNode;
+        this.rear.next = newNode;
+        this.rear = newNode;
     }
     dequeue() {
         if (!this.front) return "QUEUE UNDERFLOW";
