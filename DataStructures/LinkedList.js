@@ -1,6 +1,6 @@
 class Node {
-    constructor(data) {
-        this.data = data
+    constructor(value) {
+        this.value = value
         this.next = null;
     }
 }
@@ -26,7 +26,7 @@ class LinkedList {
     }
 
     front() {
-        return this.head ? this.head.data : null;
+        return this.head ? this.head.value : null;
     }
 
     back() {
@@ -35,7 +35,7 @@ class LinkedList {
         while (current.next) {
             current = current.next
         }
-        return current.data
+        return current.value
     }
 
     at(index) {
@@ -44,11 +44,11 @@ class LinkedList {
             current = current.next
             index--;
         }
-        return current ? current.data : null;
+        return current ? current.value : null;
     }
 
-    append(data) {
-        const newNode = new Node(data);
+    append(value) {
+        const newNode = new Node(value);
         if (!this.head) {
             this.head = newNode
         }
@@ -64,7 +64,7 @@ class LinkedList {
     pop() {
         if (!this.head) return null;
         if (!this.head.next) {
-            const val = this.head.data
+            const val = this.head.value
             this.head = null;
             return val;
         }
@@ -72,20 +72,20 @@ class LinkedList {
         while (current.next.next) {
             current = current.next
         }
-        const val = current.next.data
+        const val = current.next.value
         current.next = null;
         return val
     }
 
-    prepend(data) {
-        const newNode = new Node(data)
+    prepend(value) {
+        const newNode = new Node(value)
         newNode.next = this.head;
         this.head = newNode;
     }
 
     popFront() {
         if (!this.head) return null;
-        const val = this.head.data
+        const val = this.head.value
         this.head = this.head.next
         return val;
     }
@@ -111,15 +111,15 @@ class LinkedList {
         node.next = current
     }
 
-    delete(data) {
+    delete(value) {
         if (!this.head) return;
-        if (this.head.data === data) {
+        if (this.head.value === value) {
             this.head = this.head.next;
             return;
         }
         let current = this.head;
         while (current.next) {
-            if (current.next.data === data) {
+            if (current.next.value === value) {
                 current.next = current.next.next;
                 return;
             }
@@ -127,20 +127,33 @@ class LinkedList {
         }
     }
 
-    search(data) {
+    search(value) {
         let current = this.head;
         while (current) {
-            if (current.data === data) return true;
+            if (current.value === value) return true;
             current = current.next
         }
         return false;
+    }
+
+    reverse() {
+        let current = this.head;
+        let prev = null;
+
+        while (current) {
+            const next = current.next;
+            current.next = prev;
+            prev = current
+            current = next;
+        }
+        this.head = prev;
     }
 
     print() {
         let current = this.head;
         const nodes = []
         while (current) {
-            nodes.push(current.data)
+            nodes.push(current.value)
             current = current.next
         }
         console.log(nodes.join(' -> '))
@@ -171,4 +184,8 @@ console.log(linkedList.back())
 linkedList.print()
 linkedList.insert(2, 5)
 linkedList.insert(0, 15)
+linkedList.print()
+linkedList.reverse()
+linkedList.print()
+linkedList.reverse()
 linkedList.print()

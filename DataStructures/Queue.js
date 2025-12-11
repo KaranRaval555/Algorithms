@@ -1,6 +1,6 @@
 class Node {
-    constructor(data) {
-        this.data = data
+    constructor(value) {
+        this.value = value
         this.next = null;
     }
 }
@@ -15,7 +15,7 @@ class Queue {
     }
     enqueue(value) {
         const newNode = new Node(value)
-        if (!this.front) {
+        if (!this.rear) {
             this.front = newNode;
             this.rear = newNode;
             return;
@@ -25,18 +25,18 @@ class Queue {
     }
     dequeue() {
         if (!this.front) return "QUEUE UNDERFLOW";
-        const val = this.front.data;
+        const val = this.front.value;
         this.front = this.front.next;
         return val
     }
     peek() {
-        return this.front ? this.front.data : "QUEUE IS EMPTY";
+        return this.front ? this.front.value : "QUEUE IS EMPTY";
     }
     print() {
         const list = []
         let current = this.front;
         while (current) {
-            list.push(current.data);
+            list.push(current.value);
             current = current.next;
         }
         console.log(list.join(" "))
