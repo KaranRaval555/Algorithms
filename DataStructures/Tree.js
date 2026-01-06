@@ -33,7 +33,7 @@ class BinarySearchTree {
             }
             this.insertNode(root.left, newNode)
         }
-        if (newNode.value > root.value) {
+        else {
             if (!root.right) {
                 root.right = newNode;
                 return;
@@ -46,19 +46,31 @@ class BinarySearchTree {
         this.root = this.deleteNode(this.root, value)
     }
 
-    // deleteNode(root, value) {
-    //     if(!root || !(root.left && root.right) ) return null;
-    //     if(value < root.value) {
-    //         root.left = this.deleteNode(root.left, value)
-    //     }
-    //     else {
-    //         root.right = this.deleteNode(root.right, value)
-    //     }
-    //     if(!root.left) return root.right
-    //     if(!root.right) return root.left
-    //
-    //     return root;
-    // }
+    deleteNode(root, value) {
+        if (!root) return null;
+
+        if (value < root.value) {
+            root.left = this.deleteNode(root.left, value)
+            return root
+        }
+        else if (value > root.value) {
+            root.right = this.deleteNode(root.right, value)
+            return root
+        }
+        else {
+            // no children
+            if (!root.left && !root.right) return null;
+
+            // one child
+            if (!root.left) return root.right
+            if (!root.right) return root.left
+
+            // two children
+            root.value = this.min(root.right)
+            root.right = this.deleteNode(root.right, root.value)
+            return root;
+        }
+    }
 
     search(root, value) {
         if (!root) return false;
@@ -110,13 +122,15 @@ class BinarySearchTree {
     }
 
     bfs() {
+        if (!this.root) return null;
+
         const result = [];
         const queue = [this.root];
         while (queue.length) {
-            let curr = queue.shift();
-            result.push(curr.value)
-            if (curr.left) queue.push(curr.left)
-            if (curr.right) queue.push(curr.right)
+            const node = queue.shift();
+            result.push(node.value)
+            if (node.left) queue.push(node.left)
+            if (node.right) queue.push(node.right)
         }
         return result.join(' ')
     }
@@ -124,7 +138,7 @@ class BinarySearchTree {
     min = (root) =>
         (!root.left)
             ? root.value
-            : this.max(root.left)
+            : this.min(root.left)
 
     max = (root) =>
         (!root.right)
@@ -144,6 +158,10 @@ bst.insert(5)
 bst.insert(15)
 bst.insert(3)
 bst.insert(7)
+console.log(bst.bfs())
+console.log(bst.inOrder())
+bst.delete(5)
+console.log(bst.bfs())
 console.log(bst.isEmpty())
 bst.print()
 console.log(bst.search(bst.root, 15));
