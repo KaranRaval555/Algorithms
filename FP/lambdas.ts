@@ -136,5 +136,5 @@ export const flatten = <T>([first, ...rest]: NestedArray<T>) =>
             : [first, ...flatten(rest)];
 
 
-export const flatmap = (array, callback) =>
-    flatten(map(array, callback))
+export const flatmap = (array, fn) =>
+    flatten(map(array, fn))

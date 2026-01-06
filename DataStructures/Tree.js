@@ -73,39 +73,52 @@ class BinarySearchTree {
         }
     }
 
-    preOrder(root) {
-        if (!root) return;
-        console.log(root.value)
-        this.preOrder(root.left)
-        this.preOrder(root.right)
+    preOrder() {
+        const result = [];
+        const traverse = (node) => {
+            if (!node) return;
+            result.push(node.value)
+            traverse(node.left)
+            traverse(node.right)
+        }
+        traverse(this.root)
+        return result.join(' ')
     }
 
-    inOrder(root) {
-        if (!root) return;
-        this.inOrder(root.left)
-        console.log(root.value)
-        this.inOrder(root.right)
+    inOrder() {
+        const result = [];
+        const traverse = (node) => {
+            if (!node) return;
+            traverse(node.left)
+            result.push(node.value)
+            traverse(node.right)
+        }
+        traverse(this.root)
+        return result.join(' ')
     }
 
-    postOrder(root) {
-        if (!root) return;
-        this.postOrder(root.left)
-        this.postOrder(root.right)
-        console.log(root.value)
+    postOrder() {
+        const result = [];
+        const traverse = (node) => {
+            if (!node) return;
+            traverse(node.left)
+            traverse(node.right)
+            result.push(node.value)
+        }
+        traverse(this.root)
+        return result.join(' ')
     }
 
     bfs() {
+        const result = [];
         const queue = [this.root];
         while (queue.length) {
             let curr = queue.shift();
-            console.log(curr.value)
-            if (curr.left) {
-                queue.push(curr.left)
-            }
-            if (curr.right) {
-                queue.push(curr.right)
-            }
+            result.push(curr.value)
+            if (curr.left) queue.push(curr.left)
+            if (curr.right) queue.push(curr.right)
         }
+        return result.join(' ')
     }
 
     min = (root) =>
@@ -137,6 +150,10 @@ console.log(bst.search(bst.root, 15));
 console.log(bst.search(bst.root, 1));
 bst.postOrder(bst.root)
 bst.print()
-bst.bfs()
+console.log(bst.bfs())
 console.log("min", bst.min(bst.root))
 console.log("max", bst.max(bst.root))
+bst.print()
+console.log(bst.preOrder())
+console.log(bst.inOrder())
+console.log(bst.postOrder())

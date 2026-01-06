@@ -43,6 +43,7 @@ class Bucket {
         while (curr) {
             if (curr.key === key) {
                 prev.next = curr.next;
+                return;
             }
             prev = curr;
             curr = curr.next;

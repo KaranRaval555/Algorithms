@@ -5,7 +5,7 @@ class Node {
     }
 }
 
-class LinkedList {
+class SinglyLinkedList {
 
     constructor() {
         this.head = null;
@@ -17,10 +17,10 @@ class LinkedList {
 
     size() {
         let count = 0;
-        let current = this.head;
-        while (current) {
+        let curr = this.head;
+        while (curr) {
             count++;
-            current = current.next;
+            curr = curr.next;
         }
         return count
     }
@@ -31,20 +31,20 @@ class LinkedList {
 
     back() {
         if (!this.head) return null;
-        let current = this.head;
-        while (current.next) {
-            current = current.next
+        let curr = this.head;
+        while (curr.next) {
+            curr = curr.next
         }
-        return current.value
+        return curr.value
     }
 
     at(index) {
-        let current = this.head;
-        while (index > 0 && current) {
-            current = current.next
+        let curr = this.head;
+        while (index > 0 && curr) {
+            curr = curr.next
             index--;
         }
-        return current ? current.value : null;
+        return curr && index >= 0 ? curr.value : null;
     }
 
     append(value) {
@@ -53,11 +53,11 @@ class LinkedList {
             this.head = newNode
         }
         else {
-            let current = this.head;
-            while (current.next) {
-                current = current.next
+            let curr = this.head;
+            while (curr.next) {
+                curr = curr.next
             }
-            current.next = newNode;
+            curr.next = newNode;
         }
     }
 
@@ -68,17 +68,21 @@ class LinkedList {
             this.head = null;
             return val;
         }
-        let current = this.head;
-        while (current.next.next) {
-            current = current.next
+        let curr = this.head;
+        while (curr.next.next) {
+            curr = curr.next
         }
-        const val = current.next.value
-        current.next = null;
+        const val = curr.next.value
+        curr.next = null;
         return val
     }
 
     prepend(value) {
         const newNode = new Node(value)
+        if (!this.head) {
+            this.head = newNode
+            return;
+        }
         newNode.next = this.head;
         this.head = newNode;
     }
@@ -91,89 +95,94 @@ class LinkedList {
     }
 
     insert(index, value) {
+        if (index < 0 || index > this.size()) return;
+
         if (index === 0) {
             this.prepend(value)
             return;
         }
 
-        if (!this.head) return;
-        let current = this.head;
+        let curr = this.head;
         let prev = null;
-        while (index > 0 && current) {
-            prev = current
-            current = current.next
+
+        while (index > 0 && curr) {
+            prev = curr
+            curr = curr.next
             index--;
         }
-        if (index > 0) return;
 
         const node = new Node(value)
         prev.next = node;
-        node.next = current
+        node.next = curr
     }
 
     delete(value) {
         if (!this.head) return;
+
         if (this.head.value === value) {
             this.head = this.head.next;
             return;
         }
-        let current = this.head;
-        while (current.next) {
-            if (current.next.value === value) {
-                current.next = current.next.next;
+
+        let curr = this.head;
+        while (curr.next) {
+            if (curr.next.value === value) {
+                curr.next = curr.next.next;
                 return;
             }
-            current = current.next
+            curr = curr.next
         }
     }
 
     search(value) {
-        let current = this.head;
-        while (current) {
-            if (current.value === value) return true;
-            current = current.next
+        let curr = this.head;
+        while (curr) {
+            if (curr.value === value) return true;
+            curr = curr.next
         }
         return false;
     }
 
     reverse() {
-        let current = this.head;
+        if (!this.head) return null;
+
+        let curr = this.head;
         let prev = null;
 
-        while (current) {
-            const next = current.next;
-            current.next = prev;
-            prev = current
-            current = next;
+        while (curr) {
+            const next = curr.next;
+            curr.next = prev;
+            prev = curr
+            curr = next;
         }
         this.head = prev;
     }
 
     print() {
-        let current = this.head;
+        let curr = this.head;
         const nodes = []
-        while (current) {
-            nodes.push(current.value)
-            current = current.next
+        while (curr) {
+            nodes.push(curr.value)
+            curr = curr.next
         }
         console.log(nodes.join(' -> '))
     }
 }
 
-const linkedList = new LinkedList();
+const linkedList = new SinglyLinkedList();
 linkedList.append(10);
 linkedList.append(20);
 linkedList.append(30);
 console.log(linkedList.at(2))
 console.log(linkedList.size())
 linkedList.prepend(5);
-linkedList.print(); // Output: 5 -> 10 -> 20 -> 30
+linkedList.print();
 linkedList.delete(20);
-linkedList.print(); // Output: 5 -> 10 -> 30
+linkedList.print();
 linkedList.popFront()
-linkedList.print(); // Output: 5 -> 10 -> 30
-console.log(linkedList.search(10)); // Output: true
-console.log(linkedList.search(50)); // Output: false
+linkedList.print();
+console.log(linkedList.search(10));
+console.log(linkedList.search(50));
 linkedList.append(40);
 linkedList.append(50);
 linkedList.print()
@@ -183,7 +192,8 @@ console.log(linkedList.front())
 console.log(linkedList.back())
 linkedList.print()
 linkedList.insert(2, 5)
-linkedList.insert(0, 15)
+linkedList.print()
+linkedList.insert(4, 15)
 linkedList.print()
 linkedList.reverse()
 linkedList.print()
