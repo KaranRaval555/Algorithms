@@ -153,6 +153,17 @@ class LinkedList {
         this.head = prev;
     }
 
+    reverseRecur(node) {
+        if (!node || !node.next) {
+            this.head = node;
+            return;
+        }
+        this.reverseRecur(node.next);
+
+        node.next.next = node;
+        node.next = null;
+    }
+
     print() {
         let current = this.head;
         const nodes = []
@@ -191,5 +202,6 @@ linkedList.insert(0, 15)
 linkedList.print()
 linkedList.reverse()
 linkedList.print()
-linkedList.reverse()
+// linkedList.reverse()
+linkedList.reverseRecur(linkedList.head)
 linkedList.print()
